@@ -1,0 +1,10 @@
+<resources>
+
+	<style name="AppTheme" parent="android:Theme.Light" />
+
+	<dimen name="widget_margin">8dp</dimen>
+	<dimen name="clock_font_size">48pt</dimen>
+	<dimen name="seconds_font_size">24pt</dimen>
+	<dimen name="ampm_font_size">16pt</dimen>
+
+</resources>
