@@ -69,6 +69,10 @@ public class MyClockWidget extends AppWidgetProvider
 
 		Calendar now = Calendar.getInstance();
 		String nextAlarm = Settings.System.getString(context.getContentResolver(), Settings.System.NEXT_ALARM_FORMATTED);
+		if (nextAlarm == null || "".equals(nextAlarm))
+		{
+			nextAlarm = context.getResources().getString(R.string.no_alarm);
+		}
 
 		RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
 		updateViews.setImageViewBitmap(R.id.display_clock, renderClock(context, now));
@@ -82,6 +86,7 @@ public class MyClockWidget extends AppWidgetProvider
 			Log.e("MyClockWidget", e.getLocalizedMessage(), e);
 		}
 
+		// Set next alarm text
 		updateViews.setTextViewText(R.id.display_next_alarm, nextAlarm);
 		appWidgetManager.updateAppWidget(component, updateViews);
 	}
@@ -137,7 +142,7 @@ public class MyClockWidget extends AppWidgetProvider
 		// Calculate image dimensions
 		int primaryWidth = clockBounds.width();
 		int secondaryWidth = ampmBounds.width() > secondsBounds.width() ? ampmBounds.width() : secondsBounds.width();
-		int width = primaryWidth + PADDING + PADDING + secondaryWidth;
+		int width = PADDING + primaryWidth + PADDING + PADDING + secondaryWidth;
 		int height = clockBounds.height();
 
 		// Create image and canvas to render to
@@ -145,8 +150,8 @@ public class MyClockWidget extends AppWidgetProvider
 		Canvas canvas = new Canvas(clockBitmap);
 
 		// Render clock
-		canvas.drawText(clockText, primaryWidth, height - 1, paint);
-		int xOffset = primaryWidth + PADDING;
+		canvas.drawText(clockText, PADDING + primaryWidth, height - 1, paint);
+		int xOffset = PADDING + primaryWidth + PADDING;
 		if (!DateFormat.is24HourFormat(context))
 		{
 			canvas.drawText(cal.get(Calendar.AM_PM) == Calendar.PM ? pm : am, xOffset, height - ampmPaint.descent(), ampmPaint);

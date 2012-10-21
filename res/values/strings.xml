@@ -1,7 +1,7 @@
 <resources>
 
 	<string name="app_name">MyClockWidget</string>
-	<string name="no_alarm">None</string>
+	<string name="no_alarm">No Alarms Set</string>
 	<string name="sep">:</string>
 	<string name="am">am</string>
 	<string name="pm">pm</string>

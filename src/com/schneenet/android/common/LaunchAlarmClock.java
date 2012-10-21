@@ -4,7 +4,6 @@ import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
@@ -18,7 +17,7 @@ public class LaunchAlarmClock
 					"com.htc.android.worldclock",
 					"com.htc.android.worldclock.WorldClockTabControl" },
 			{
-					"Standar Alarm Clock",
+					"Standard Alarm Clock",
 					"com.android.deskclock",
 					"com.android.deskclock.AlarmClock" },
 			{
@@ -51,14 +50,14 @@ public class LaunchAlarmClock
 			try
 			{
 				ComponentName cn = new ComponentName(packageName, className);
-				ActivityInfo aInfo = packageManager.getActivityInfo(cn, PackageManager.GET_META_DATA);
+				packageManager.getActivityInfo(cn, PackageManager.GET_META_DATA);
 				alarmClockIntent.setComponent(cn);
 				Log.d(TAG, "Found " + vendor + " --> " + packageName + "/" + className);
 				foundClockImpl = true;
 			}
 			catch (NameNotFoundException e)
 			{
-				Log.d(TAG, vendor + " does not exists");
+				Log.d(TAG, vendor + " does not exist on device.");
 			}
 		}
 
